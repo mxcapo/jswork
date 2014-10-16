@@ -1,3 +1,5 @@
+// Return a list of the duplicates
+
 var votesToGoEatCake = [true, true, true, true];
 
 var hackbrightStudents = ["katie", "amy", "jenny", "katie", "kelley", "katie", "amy"];
