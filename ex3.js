@@ -12,64 +12,49 @@ var randomJunkIFound = ["katie", "true", true, 19, "gargoyles", "!", 2 + 3, "2 +
     19, "19", 19 === "19", 6, false, false];
 
 
-function give_duplicates(search_list)
+function in_array(array, value)
 {
-    var dupe_list = [];
-    var length = search_list.length;
-    console.log(length);
-
-    for (var i = 0; i < length; i++) 
+    for (var i = 0; i < array.length; i++)
     {
-        for (var j = i + 1; j < length; j++)
+        if (array[i] === value)
         {
-            if (search_list[i] === search_list[j])
-            {
-                if (search_list[i] in dupe_list)
-                {
-                 continue;
-                }
-                else
-                {
-                    dupe_list.push(search_list[i]);
-                }
-                
-            }
-
+            return true;
         }
+
     }
-    return dupe_list;
+    return false;
 }
+
 
 
 function give_duplicates(search_list)
 {
     var dupe_dict = {};
+    var dump_list = [];
 
     for (var n = 0; n < search_list.length; n++)
     {
+        var obj_type = typeof(search_list[n]);
+        var search_item = search_list[n] + obj_type;
         
-        if (search_list[n] in dupe_dict)
+        if (search_item in dupe_dict)
         {
-            dupe_dict[search_list[n]] += 1;
+            if (in_array(dump_list, search_list[n]) === true)
+            {
+                continue;
+            }
+            else
+            {
+                dump_list.push(search_list[n]);
+            }
         }
 
         else
             {
-                dupe_dict[search_list[n]] = 1;
+                dupe_dict[search_item] = search_list[n];
             }
     }
-
-    var dupe_list = [];
-
-    for (var key in dupe_dict)
-    {
-        if (dupe_dict[key] > 1)
-        {
-            dupe_list.push(key);
-        }
-    }
-    return dupe_list;
-
+    return dump_list;
 }
 
 console.log(give_duplicates(votesToGoEatCake));
